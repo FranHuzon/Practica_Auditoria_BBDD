@@ -25,13 +25,35 @@ En caso de que el parámetro esté en "none", para activar la auditoría usamos:
 ALTER SYSTEM SET audit_trail={valor} scope=spfile;
 `
 
-Los distintos valores vienen más detalladas [aquí](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams017.htm#REFRN10006)
-
-Más información sobre el parámetro [scope](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams004.htm#REFRN00102)
+Los distintos valores vienen más detalladas [aquí](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams017.htm#REFRN10006). Más información sobre el parámetro [scope](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams004.htm#REFRN00102)
 
 1. Activa desde SQLPlus la auditoría de los intentos de acceso fallidos al sistema. Comprueba su funcionamiento.
 
-Luego, si queremos activarla auditoría de los accesos fallidos a la base de datos usamos el comando:
+Luego, si queremos activar la auditoría de los accesos fallidos a la base de datos usamos el comando:
+
+`
+audit session whenever not successful;
+`
+
+Vamos a ejecutar este comando como *sys* y conectaremos de forma errónea con el usuario *fran* para comprobar la auditoría:
+
+`
+SQL> audit session whenever not successful;
+
+Auditoría terminada correctamente.
+`
+
+`
+SQL> connect fran
+Introduzca la contraseña: 
+ERROR:
+ORA-01017: invalid username/password; logon denied
+`
+
+`
+SQL> Select username,action_name,returncode,extended_timestamp from dba_audit_session where username = 'FRAN' order by extended_timestamp;
+`
+
 
 2. Realiza un procedimiento en PL/SQL que te muestre los accesos fallidos junto con el motivo de los mismos, transformando el código de error almacenado en un mensaje de texto comprensible.
 
