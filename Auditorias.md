@@ -3,7 +3,33 @@
 Vamos a realizar una seria ejercicios para practicar algunos conceptos básicos de auditoría sobre una base de datos 
 Oracle:
 
-1. Activa desde SQL*Plus la auditoría de los intentos de acceso fallidos al sistema. Comprueba su funcionamiento.
+Primero vamos a comprobar si están avtivas las auditorías para nuestra base de datos:
+
+`
+SQL> show parameter audit;
+
+NAME				                 | TYPE	     | VALUE
+---------------------------- | --------- | ------------------------------
+audit_file_dest 		         | string	   | /opt/oracle/admin/orcl/adump
+audit_syslog_level	         | string	   |
+audit_sys_operations         | boolean	 | TRUE
+audit_trail			             | string	   | DB
+unified_audit_sga_queue_size | integer	 | 1048576
+
+`
+El valor del parámetro audit_trail es el que indica si esta activada o no. En nuestro caso,"db" indica que la auditoría esta activa y los datos se almacenarán en la base de datos de Oracle.
+
+En caso de que el parámetro esté en "none", para activar la auditoría usamos:
+
+`
+ALTER SYSTEM SET audit_trail={valor} scope=spfile;
+`
+Los distintos valores vienen más detalladas [aquí](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams017.htm#REFRN10006)
+Más información sobre el parámetro [scope](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams004.htm#REFRN00102)
+
+1. Activa desde SQLPlus la auditoría de los intentos de acceso fallidos al sistema. Comprueba su funcionamiento.
+
+Luego, si queremos activarla auditoría de los accesos fallidos a la base de datos usamos el comando:
 
 2. Realiza un procedimiento en PL/SQL que te muestre los accesos fallidos junto con el motivo de los mismos, transformando el código de error almacenado en un mensaje de texto comprensible.
 
