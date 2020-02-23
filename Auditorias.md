@@ -24,7 +24,9 @@ En caso de que el parámetro esté en "none", para activar la auditoría usamos:
 `
 ALTER SYSTEM SET audit_trail={valor} scope=spfile;
 `
+
 Los distintos valores vienen más detalladas [aquí](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams017.htm#REFRN10006)
+
 Más información sobre el parámetro [scope](https://docs.oracle.com/cd/E11882_01/server.112/e40402/initparams004.htm#REFRN00102)
 
 1. Activa desde SQLPlus la auditoría de los intentos de acceso fallidos al sistema. Comprueba su funcionamiento.
