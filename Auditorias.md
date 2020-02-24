@@ -94,6 +94,22 @@ end;
 
 3. Activa la auditoría de las operaciones DML realizadas por SCOTT. Comprueba su funcionamiento.
 
+Activamos la auditoria desde un usuario con privilegios:
+
+`AUDIT SELECT TABLE, INSERT TABLE, UPDATE TABLE, DELETE TABLE BY SCOTT;`
+
+![foto4](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria4.png)
+
+Realizamos acciones DML con el usuario SCOTT:
+
+![foto5](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria5.png)
+
+Vemos los registros de la auditoria:
+
+`select object_name,action_name,extended_timestamp from dba_audit_object where owner='SCOTT' order by extended_timestamp;`
+
+![foto6](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria6.png)
+
 4. Realiza una auditoría de grano fino para almacenar información sobre la inserción de empleados del departamento 10 en la tabla emp de scott.
 
 5. Explica la diferencia entre auditar una operación by access o by session.
