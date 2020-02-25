@@ -112,6 +112,35 @@ Vemos los registros de la auditoria:
 
 4. Realiza una auditoría de grano fino para almacenar información sobre la inserción de empleados del departamento 10 en la tabla emp de scott.
 
+Para crear esta auditoría de una columna específica no se puede usar la auditoría unificada de ORACLE 12c, para ello debemos complementarla con FGA, "Fine-Grained-Auditing". 
+
+Para crear la política de la auditoría usamos:
+
+```
+BEGIN
+    DBMS_FGA.ADD_POLICY (
+        object_schema      =>  'SCOTT',
+        object_name        =>  'EMP',
+        policy_name        =>  'nuevos_empleados_dept_10',
+        audit_condition    =>  'DEPTNO = 10',
+        statement_types    =>  'INSERT'
+    );
+END;
+/
+```
+
+En la imagen vemos la creación de la política y si se ha creado correctamente en la vista dba_audit_policies
+
+![foto7](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria7.png)
+
+Ahora conectamos con el usuario SCOTT en insertamos un nuevo empleado en la tabla EMP y que pertenezca al departamento 10:
+
+`INSERT INTO emp VALUES(6894,'FRAN','SEGURIDAD',null,sysdate,1500,0,10);`
+
+Nos conectamos como SYS y comprobamos los registros de la auditoria de grano fino:
+
+![foto8](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria8.png)
+
 5. Explica la diferencia entre auditar una operación by access o by session.
 
 6. Documenta las diferencias entre los valores db y db, extended del parámetro audit_trail de ORACLE. Demuéstralas poniendo un ejemplo de la información sobre una operación concreta recopilada con cada uno de ellos.
