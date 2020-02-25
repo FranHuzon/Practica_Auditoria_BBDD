@@ -141,7 +141,43 @@ Nos conectamos como SYS y comprobamos los registros de la auditoria de grano fin
 
 ![foto8](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria8.png)
 
+Aquí dejo un enlace con más información sobre las [auditorías de grano fino](https://docs.oracle.com/database/121/ARPLS/d_fga.htm#ARPLS015).
+
 5. Explica la diferencia entre auditar una operación by access o by session.
+
+Las auditorías pueden realizarse por acceso o por sesión, vamos a explicarlo:
+
+**BY SESSION**: Provoca que Oracle inserte un único registro resumen en la tabla de auditoría aunque la sentencia se ejecute varias veces en la misma sesión.
+
+**BY ACCESS**:  Provoca la escritura de un registro en las tablas de auditoría cada vez que la sentencia se ejecuta. Cuando se especifican auditorías de sentencias DDL o de privilegios del sistema, la auditoría por defecto es por accesos. Cuando se auditan sobre objetos o sentencias DML, la auditoría por defecto es por sesión.
+
+Vamos a ver un ejemplo by access:
+
+Creación de la auditoría:
+
+![foto9](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria9.png)
+
+Acciones con SCOTT:
+
+![foto10](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria10.png)
+
+Comprobación de registros de la auditoría:
+
+![foto11](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria11.png)
+
+Vamos a ver un ejemplo by session:
+
+Creación de la auditoría:
+
+![foto12](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria12.png)
+
+Acciones con SCOTT:
+
+![foto13](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria13.png)
+
+Comprobación de registros de la auditoría:
+
+![foto14](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria14.png)
 
 6. Documenta las diferencias entre los valores db y db, extended del parámetro audit_trail de ORACLE. Demuéstralas poniendo un ejemplo de la información sobre una operación concreta recopilada con cada uno de ellos.
 
