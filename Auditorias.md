@@ -226,4 +226,8 @@ Ahora, repetimos el proceso anterior de creación de una tabla con el usuario sc
 
 10. Averigua las posibilidades que ofrece MongoDB para auditar los cambios que va sufriendo un documento.
 
+No dispongo de base de datos mongo actualmente, pero he buscado información y en este [enlace](https://docs.atlas.mongodb.com/database-auditing/) explica muy bien los requisitos para las auditorías de dicho gestor y [aquí](https://docs.mongodb.com/manual/tutorial/configure-auditing/#enable-and-configure-audit-output) cómo configurarlo.
+
 11. Averigua si en MongoDB se pueden auditar los accesos al sistema.
+
+Para auditar los accesos al sistema hay que crear una configuración de filtrado para las autenticaciones en la base de datos. Es estos enlaces se explica [como crear un filtro de auditoría](https://docs.mongodb.com/manual/tutorial/configure-audit-filters/#examples) y cuáles son [los diferentes parámetros a filtrar](https://docs.mongodb.com/manual/reference/audit-message/#audit-action-details-results), en los que el primero de ellos es el de la autenticación de usuarios. 
