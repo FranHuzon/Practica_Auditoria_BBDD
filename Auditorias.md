@@ -60,7 +60,7 @@ begin
         when 28000 then
             traduccion:='Superado numero de intentos fallidos para el inicio de sesion. La cuenta esta bloqueada';
         when 2004 then
-            traduccion:='Error.violacion de seguridad';
+            traduccion:='Error. Violacion de seguridad';
         else
             traduccion:='Error no traducido';
     end case;
@@ -180,6 +180,40 @@ Comprobación de registros de la auditoría:
 ![foto14](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria14.png)
 
 6. Documenta las diferencias entre los valores db y db, extended del parámetro audit_trail de ORACLE. Demuéstralas poniendo un ejemplo de la información sobre una operación concreta recopilada con cada uno de ellos.
+
+Ambos valores hacen los mismo, solo que db,extended rellena los campos SQLtext y SQLbind del parámetro audit_trail, dándonos más información. Vamos a ver unos ejemplos.
+
+Por defecto, la base de datos se monta con el valor db. Creamos la auditoría:
+
+`AUDIT CREATE TABLE BY scott BY ACCESS;`
+
+Creamos una tabla con el usuario scott:
+
+`create table scott(id VARCHAR2(1));`
+
+Miramos el registro:
+
+`select username,action_name,extended_timestamp,sql_text,sql_bind from dba_audit_trail where username = 'SCOTT' order by extended_timestamp;`
+
+![foto15](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria15.png)
+
+Ahora, un ejemplo con el valor db, extended:
+
+Modificamos el sistema para que use ese valor en la auditoría:
+
+`alter system set AUDIT_TRAIL=db, extended scope=spfile;`
+
+![foto16](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria16.png)
+
+Para que surta efecto el cambio, debemos realizar un reinicio de la base de datos:
+
+`SQL> shutdown`
+
+`SQL> startup`
+
+Ahora, repetimos el proceso anterior de creación de una tabla con el usuario scott, y vemos el registro de la auditoría:
+
+![foto17](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria17.png)
 
 7. Localiza en Enterprise Manager las posibilidades para realizar una auditoría e intenta repetir con dicha herramienta los apartados 1, 3 y 4.
 
