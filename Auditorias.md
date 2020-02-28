@@ -181,7 +181,7 @@ Comprobación de registros de la auditoría:
 
 6. Documenta las diferencias entre los valores db y db, extended del parámetro audit_trail de ORACLE. Demuéstralas poniendo un ejemplo de la información sobre una operación concreta recopilada con cada uno de ellos.
 
-Ambos valores hacen los mismo, solo que db,extended rellena los campos SQLtext y SQLbind del parámetro audit_trail, dándonos más información. Vamos a ver unos ejemplos.
+Ambos valores hacen los mismo, registran la auditoría en una tabla de la base de datos, solo que db,extended rellena los campos SQLtext y SQLbind del parámetro audit_trail, dándonos más información. Vamos a ver unos ejemplos.
 
 Por defecto, la base de datos se monta con el valor db. Creamos la auditoría:
 
@@ -214,6 +214,9 @@ Para que surta efecto el cambio, debemos realizar un reinicio de la base de dato
 Ahora, repetimos el proceso anterior de creación de una tabla con el usuario scott, y vemos el registro de la auditoría:
 
 ![foto17](https://github.com/FranHuzon/Practica_Auditoria_BBDD/blob/master/images/auditoria17.png)
+
+
+**NOTA**: A diferencia de la opción db, también existe la opción xml, que guarda los registros de la auditoría en un fichero xml. En el ejercicio 1 se dejó un enlace a más información sobre estos valores.
 
 7. Localiza en Enterprise Manager las posibilidades para realizar una auditoría e intenta repetir con dicha herramienta los apartados 1, 3 y 4.
 
